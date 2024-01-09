@@ -1,0 +1,23 @@
+load "env.rb"
+
+Vagrant.configure('2') do |config|
+    config.vm.define $vm_name do |config|
+        config.vm.provider :digital_ocean do |provider, override|
+          override.ssh.private_key_path = '~/.ssh/id_rsa'
+          override.vm.box = 'digital_ocean'
+          override.vm.box_url = "https://github.com/devopsgroup-io/vagrant-digitalocean/raw/master/box/digital_ocean.box"
+          override.nfs.functional = false
+          override.vm.allowed_synced_folder_types = :rsync
+          provider.token = $token
+          provider.image = 'debian-12-x64'
+          provider.region = 'fra1'
+          provider.size = 's-2vcpu-2gb'
+          provider.backups_enabled = false
+          provider.private_networking = false
+          provider.ipv6 = false
+          provider.monitoring = false
+        end
+        config.vm.provision "file", source: "foo", destination: "foo"
+        config.vm.provision "shell", path: "os_bootstrap.sh", privileged: true
+    end
+end

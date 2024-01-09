@@ -1,0 +1,12 @@
+# Ignore Vagrant env files
+/*/env.rb
+
+# Ignore Vagrant config files
+/*/.vagrant
+
+# Ignore VS Code config files
+.vscode
+
+# Ignore Obsidian config files
+.obsidian
+
