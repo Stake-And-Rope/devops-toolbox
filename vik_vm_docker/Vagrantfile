@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
     config.vm.network "private_network", ip: "192.168.56.101"
     config.vm.network :forwarded_port, guest: 22, host: 2222, auto_correct: true
     config.vm.network :forwarded_port, guest: 81, host: 8081, auto_correct: true
+    config.vm.synced_folder "C:\discord-orchestrator-svc", "/discord-orchestrator"
     config.vm.provider :virtualbox do |vb|
         vb.memory = 4096
         vb.cpus = 2
